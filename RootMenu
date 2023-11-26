@@ -1,0 +1,52 @@
+///Powered by Ak1ne
+
+using System;
+using System.Windows.Forms;
+
+namespace InfiniteMenuApp
+{
+    public partial class MainForm : Form
+    {
+        public MainForm()
+        {
+
+            MenuStrip mainMenu = new MenuStrip();
+
+            ToolStripMenuItem MenuItem = new ToolStripMenuItem("Root Menu");
+            AddSubMenu(MenuItem, 4); // 4 - кол-во уровней подменю
+
+            mainMenu.Items.Add(MenuItem);
+
+            this.MainMenuStrip = mainMenu;
+
+            Controls.Add(mainMenu);
+        }
+
+        private void AddSubMenu(ToolStripMenuItem parentItem, int depth)
+        {
+            if (depth <= 0)
+            {
+                return;
+            }
+
+            for (int i = 1; i <= 3; i++)
+            {
+                ToolStripMenuItem subMenuItem = new ToolStripMenuItem($"Подраздел {i}");
+                parentItem.DropDownItems.Add(subMenuItem);
+
+                AddSubMenu(subMenuItem, depth - 1);
+            }
+        }
+
+        public static void Main()
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+
+            Application.Run(new MainForm());
+        }
+    }
+}
+
+
+///Powered by Ak1ne
